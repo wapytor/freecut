@@ -57,6 +57,20 @@ summary{cursor:pointer;font-weight:700}
 details p{margin-top:10px;color:var(--mut);font-size:14.5px}
 footer{margin-top:90px;padding:32px 0 50px;border-top:1px solid var(--line);text-align:center;color:var(--mut);font-size:13.5px}
 @media(max-width:640px){.links{display:none}.step{padding-left:62px}}
+.dlm{position:fixed;inset:0;z-index:50;display:none;place-items:center;padding:20px;background:rgba(5,6,8,.72);backdrop-filter:blur(6px)}
+.dlm.on{display:grid;animation:fi .2s}
+@keyframes fi{from{opacity:0}}
+.dlb{position:relative;width:min(440px,100%);padding:34px 30px 28px;border-radius:20px;background:var(--panel);border:1px solid var(--line);text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.7),0 0 100px rgba(22,211,217,.18);animation:pop .25s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes pop{from{transform:scale(.92) translateY(10px);opacity:0}}
+.dlb .spin{width:46px;height:46px;margin:0 auto 16px;border-radius:50%;border:4px solid rgba(22,211,217,.2);border-top-color:var(--a);animation:rot 1s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.dlb h3{font-size:22px;letter-spacing:-.01em}
+.dlb p{margin-top:10px;color:var(--mut);font-size:15px}
+.dlb .row{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+.dlb .btn{justify-content:center;padding:13px 20px;font-size:15px}
+.dlb .x{position:absolute;right:14px;top:10px;background:none;border:0;color:var(--mut);font-size:26px;cursor:pointer;line-height:1}
+.dlb .x:hover{color:var(--txt)}
+.dlb .skip{background:none;border:0;color:var(--mut);font:inherit;font-size:13.5px;cursor:pointer;text-decoration:underline}
 </style>
 </head>
 <body>
@@ -71,7 +85,7 @@ footer{margin-top:90px;padding:32px 0 50px;border-top:1px solid var(--line);text
     <h1>The video editor that <em>never asks for money</em></h1>
     <p class="lead">A CapCut-style editor with keyframes, captions, colour grading and AI background removal. No paywall, no watermark, no account. Everything runs on your PC.</p>
     <div class="cta">
-      <a class="btn primary" href="https://github.com/wapytor/freecut/releases/latest/download/FreeCut-Setup-0.1.0.exe"><svg viewBox="0 0 24 24"><path d="M12 3v11.2l4.1-4.1 1.4 1.4L12 17l-5.5-5.5 1.4-1.4 4.1 4.1V3zM5 19h14v2H5z"/></svg>Download for Windows</a>
+      <a class="btn primary" data-dl href="https://github.com/wapytor/freecut/releases/latest/download/FreeCut-Setup-0.1.0.exe"><svg viewBox="0 0 24 24"><path d="M12 3v11.2l4.1-4.1 1.4 1.4L12 17l-5.5-5.5 1.4-1.4 4.1 4.1V3zM5 19h14v2H5z"/></svg>Download for Windows</a>
       <a class="btn" href="https://github.com/wapytor/freecut/releases/latest">All releases</a>
     </div>
     <p class="fine">Free forever. If it saves you a sub, <a href="https://ko-fi.com/raptormakesstuff" target="_blank" rel="noopener" style="color:var(--a)">buy me a coffee ☕</a>.<br>Windows 10/11 &middot; about 185 MB &middot; open source (MIT)</p>
@@ -113,5 +127,29 @@ footer{margin-top:90px;padding:32px 0 50px;border-top:1px solid var(--line);text
 
   <footer>Made by <b style="color:var(--txt)">Raptor</b> &nbsp;&middot;&nbsp; <a href="https://ko-fi.com/raptormakesstuff" target="_blank" rel="noopener">☕ Donate</a> &nbsp;&middot;&nbsp; <a href="https://github.com/wapytor/freecut">Source on GitHub</a></footer>
 </div>
+
+<div class="dlm" id="dlm" role="dialog" aria-modal="true" aria-labelledby="dlt">
+  <div class="dlb">
+    <button class="x" id="dlx" aria-label="Close">&times;</button>
+    <div class="spin"></div>
+    <h3 id="dlt">Your download is starting&hellip;</h3>
+    <p>FreeCut is free and always will be. If you like it and find it useful, please consider donating. It keeps me building more.</p>
+    <div class="row">
+      <a class="btn primary" href="https://ko-fi.com/raptormakesstuff" target="_blank" rel="noopener">&#9749; Donate on Ko-fi</a>
+      <button class="skip" id="dls">No thanks, close</button>
+    </div>
+    <p style="font-size:12.5px">Not downloading? <a href="https://github.com/wapytor/freecut/releases/latest/download/FreeCut-Setup-0.1.0.exe" style="color:var(--a)">Click here</a>. Windows may warn about an unsigned app: More info, then Run anyway.</p>
+  </div>
+</div>
+<script>
+(function(){
+  var m=document.getElementById('dlm');
+  function close(){m.classList.remove('on')}
+  document.querySelectorAll('[data-dl]').forEach(function(a){a.addEventListener('click',function(){setTimeout(function(){m.classList.add('on')},150)})});
+  document.getElementById('dlx').onclick=close;document.getElementById('dls').onclick=close;
+  m.addEventListener('click',function(e){if(e.target===m)close()});
+  addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
+</script>
 </body>
 </html>
