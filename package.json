@@ -1,0 +1,54 @@
+{
+  "name": "freecut",
+  "version": "0.1.0",
+  "description": "FreeCut - a free video editor. No paywalls, no watermark.",
+  "main": "main.js",
+  "author": "Chaz",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "rcedit": "^5.0.2"
+  },
+  "build": {
+    "appId": "com.freecut.app",
+    "productName": "FreeCut",
+    "files": [
+      "main.js",
+      "preload.js",
+      "captions.js",
+      "bgremove.js",
+      "build/icon.png",
+      "src/**/*"
+    ],
+    "afterPack": "build/afterPack.js",
+    "asarUnpack": [
+      "node_modules/onnxruntime-node/**",
+      "node_modules/sharp/**",
+      "node_modules/@img/**"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico"
+    }
+  },
+  "dependencies": {
+    "@huggingface/transformers": "^4.3.2",
+    "webm-muxer": "^5.1.4"
+  }
+}

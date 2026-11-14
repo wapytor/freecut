@@ -1,0 +1,31 @@
+const { contextBridge, ipcRenderer, webUtils } = require('electron');
+
+contextBridge.exposeInMainWorld('native', {
+  pathFor: (file) => { try { return webUtils.getPathForFile(file) || null; } catch { return null; } },
+  mediaUrl: (p) => 'fc://media/?p=' + encodeURIComponent(p),
+  saveProject: (json, path, saveAs) => ipcRenderer.invoke('project:save', { json, path, saveAs }),
+  openProject: () => ipcRenderer.invoke('project:open'),
+  projList: () => ipcRenderer.invoke('proj:list'),
+  projSave: (p) => ipcRenderer.invoke('proj:save', p),
+  projLoad: (id) => ipcRenderer.invoke('proj:load', id),
+  projDelete: (id) => ipcRenderer.invoke('proj:delete', id),
+  libList: () => ipcRenderer.invoke('lib:list'),
+  libAdd: (item) => ipcRenderer.invoke('lib:add', item),
+  libRemove: (id) => ipcRenderer.invoke('lib:remove', id),
+  storeGet: (name) => ipcRenderer.invoke('store:get', name),
+  storeSet: (name, data) => ipcRenderer.invoke('store:set', name, data),
+  bgMatte: (o) => ipcRenderer.invoke('bg:matte', o),
+  bgSave: (o) => ipcRenderer.invoke('bg:save', o),
+  bgLoad: (id) => ipcRenderer.invoke('bg:load', id),
+  onBgProgress: (cb) => ipcRenderer.on('bg:progress', (_e, p) => cb(p)),
+  revBegin: (o) => ipcRenderer.invoke('rev:begin', o),
+  revVideo: (id, ch) => ipcRenderer.send('rev:video', id, ch),
+  revAudio: (id, ch) => ipcRenderer.send('rev:audio', id, ch),
+  revFinish: (id) => ipcRenderer.invoke('rev:finish', id),
+  revAbort: (id) => ipcRenderer.invoke('rev:abort', id),
+  fontsList: () => ipcRenderer.invoke('fonts:list'),
+  ttsVoices: () => ipcRenderer.invoke('tts:voices'),
+  ttsSpeak: (text, voice, rate) => ipcRenderer.invoke('tts:speak', { text, voice, rate }),
+  captions: (audio, model, language) => ipcRenderer.invoke('captions:run', { audio, model, language }),
+  onCaptionProgress: (cb) => ipcRenderer.on('captions:progress', (_e, p) => cb(p))
+});
