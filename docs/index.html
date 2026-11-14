@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FreeCut - a free video editor</title>
+<meta name="description" content="FreeCut is a free desktop video editor for Windows. CapCut-style timeline, keyframes, captions, AI background removal. No paywall, no watermark, no account.">
+<meta name="theme-color" content="#0b0b0c">
+<link rel="icon" href="icon.png">
+<meta property="og:title" content="FreeCut - a free video editor">
+<meta property="og:description" content="No paywall, no watermark, no account. A CapCut-style editor for Windows.">
+<meta property="og:image" content="screenshot.png">
+<style>
+:root{--bg:#0b0b0c;--panel:#161618;--a:#16d3d9;--a2:#7a5cff;--txt:#f2f4f5;--mut:rgba(242,244,245,.62);--line:rgba(255,255,255,.09)}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:Inter,"Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:
+ radial-gradient(55vw 50vh at 88% 6%,rgba(22,211,217,.2),transparent 70%),
+ radial-gradient(50vw 55vh at 4% 70%,rgba(122,92,255,.14),transparent 70%)}
+a{color:inherit}
+.wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:18px;text-decoration:none}
+.brand img{width:34px;height:34px;border-radius:9px}
+.links{display:flex;gap:22px;font-size:14px;color:var(--mut)}
+.links a{text-decoration:none}.links a:hover{color:var(--txt)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:14px;font-weight:700;font-size:16px;text-decoration:none;border:1px solid var(--line);background:rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:linear-gradient(135deg,var(--a),#18a8e0);color:#04191a;border:none;box-shadow:0 10px 36px rgba(22,211,217,.32)}
+.btn.primary:hover{box-shadow:0 14px 44px rgba(22,211,217,.5)}
+.btn svg{width:20px;height:20px;fill:currentColor}
+.hero{text-align:center;padding:48px 0 40px}
+.pill{display:inline-block;padding:6px 14px;border-radius:99px;border:1px solid var(--line);background:rgba(255,255,255,.05);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+h1{margin-top:22px;font-size:clamp(40px,7vw,80px);line-height:1.02;letter-spacing:-.035em;font-weight:900}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--a),var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{margin:22px auto 0;max-width:36em;font-size:clamp(17px,2vw,20px);color:var(--mut)}
+.cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;justify-content:center}
+.fine{margin-top:14px;font-size:13px;color:var(--mut)}
+.shot{margin:46px auto 0;max-width:1000px;border-radius:16px;border:1px solid var(--line);box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 120px rgba(22,211,217,.15);overflow:hidden}
+.shot img{display:block;width:100%;height:auto}
+section{padding:80px 0 0}
+h2{font-size:clamp(28px,4vw,42px);letter-spacing:-.025em;font-weight:800;text-align:center}
+.sub{text-align:center;color:var(--mut);margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:38px}
+.card{padding:24px;border-radius:16px;background:var(--panel);border:1px solid var(--line);transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-3px);border-color:rgba(22,211,217,.4)}
+.card h3{font-size:17px;margin-bottom:6px}
+.card p{font-size:14.5px;color:var(--mut)}
+.ico{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;margin-bottom:14px;background:rgba(22,211,217,.12);color:var(--a);font-size:19px}
+.steps{counter-reset:s;display:grid;gap:14px;max-width:720px;margin:36px auto 0}
+.step{position:relative;padding:20px 22px 20px 70px;border-radius:14px;background:var(--panel);border:1px solid var(--line)}
+.step::before{counter-increment:s;content:counter(s);position:absolute;left:20px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:linear-gradient(135deg,var(--a),var(--a2));color:#04191a}
+.step b{display:block}.step span{color:var(--mut);font-size:14.5px}
+details{max-width:720px;margin:12px auto 0;padding:16px 20px;border-radius:14px;background:var(--panel);border:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700}
+details p{margin-top:10px;color:var(--mut);font-size:14.5px}
+footer{margin-top:90px;padding:32px 0 50px;border-top:1px solid var(--line);text-align:center;color:var(--mut);font-size:13.5px}
+@media(max-width:640px){.links{display:none}.step{padding-left:62px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="brand" href="#"><img src="icon.png" alt="">FreeCut</a>
+    <div class="links"><a href="#features">Features</a><a href="#install">Install</a><a href="#faq">FAQ</a><a href="https://github.com/wapytor/freecut">GitHub</a></div>
+  </nav>
+
+  <header class="hero">
+    <span class="pill">Free for Windows &middot; No watermark</span>
+    <h1>The video editor that <em>never asks for money</em></h1>
+    <p class="lead">A CapCut-style editor with keyframes, captions, colour grading and AI background removal. No paywall, no watermark, no account. Everything runs on your PC.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/wapytor/freecut/releases/latest/download/FreeCut-Setup-0.1.0.exe"><svg viewBox="0 0 24 24"><path d="M12 3v11.2l4.1-4.1 1.4 1.4L12 17l-5.5-5.5 1.4-1.4 4.1 4.1V3zM5 19h14v2H5z"/></svg>Download for Windows</a>
+      <a class="btn" href="https://github.com/wapytor/freecut/releases/latest">All releases</a>
+    </div>
+    <p class="fine">Windows 10/11 &middot; about 185 MB &middot; open source (MIT)</p>
+    <div class="shot"><img src="screenshot.png" alt="FreeCut editor with timeline, player and details panel"></div>
+  </header>
+
+  <section id="features">
+    <h2>Everything you'd expect, minus the paywall</h2>
+    <p class="sub">The "pro" stuff is just included.</p>
+    <div class="grid">
+      <div class="card"><div class="ico">&#9638;</div><h3>Multi-track timeline</h3><p>Video, text and audio tracks, snapping, drag-and-drop, split, copy/paste, undo/redo and a right-click menu.</p></div>
+      <div class="card"><div class="ico">&#9670;</div><h3>Keyframes and curves</h3><p>Animate position, scale, rotation and opacity. Speed curves, reverse and freeze frames.</p></div>
+      <div class="card"><div class="ico">&#10022;</div><h3>Drag it in the preview</h3><p>Grab clips right in the player to move, scale and rotate them, with snap-to-centre guides.</p></div>
+      <div class="card"><div class="ico">&#9680;</div><h3>Colour grading</h3><p>Curves, HSL, colour wheels, temperature, tint, highlights and shadows, plus saveable presets.</p></div>
+      <div class="card"><div class="ico">&#9998;</div><h3>Text that looks good</h3><p>Fonts, gradients, glow, outlines, boxes, typewriter and wave animations, and style presets.</p></div>
+      <div class="card"><div class="ico">&#9873;</div><h3>Auto captions</h3><p>Speech-to-text with Whisper, running locally. Styled captions straight onto the timeline.</p></div>
+      <div class="card"><div class="ico">&#10070;</div><h3>AI background removal</h3><p>Cut people out of photos and video without a green screen. Chroma key and masks too.</p></div>
+      <div class="card"><div class="ico">&#8644;</div><h3>Transitions and effects</h3><p>Clip transitions, shake, pulse, glitch, RGB split, stabilise, and blur in several strengths.</p></div>
+      <div class="card"><div class="ico">&#9729;</div><h3>Library and projects</h3><p>A permanent media library for every project, autosave, and reopen any project from the home screen.</p></div>
+    </div>
+  </section>
+
+  <section id="install">
+    <h2>Get started in a minute</h2>
+    <div class="steps">
+      <div class="step"><b>Download the installer</b><span>Hit the download button above and save FreeCut-Setup.exe.</span></div>
+      <div class="step"><b>Run it</b><span>Windows may show a blue "protected your PC" box because the app isn't code-signed. Click <b style="display:inline">More info</b>, then <b style="display:inline">Run anyway</b>.</span></div>
+      <div class="step"><b>Open FreeCut</b><span>Search "FreeCut" in the Start menu, drop in your clips and start cutting.</span></div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Questions</h2>
+    <details><summary>Is it really free?</summary><p>Yes. No paywall, no watermark, no account, no ads. It's open source under the MIT licence.</p></details>
+    <details><summary>Why does Windows warn me?</summary><p>Code-signing certificates cost money, so the installer is unsigned and SmartScreen flags anything it hasn't seen much. The full source is on GitHub if you want to check it or build it yourself.</p></details>
+    <details><summary>Does my footage get uploaded anywhere?</summary><p>No. Editing, captions and background removal all run on your PC. The AI models are downloaded once the first time you use those features.</p></details>
+    <details><summary>What are the limits?</summary><p>Export runs in real time, so a 5 minute video takes about 5 minutes. The best-quality AI background removal is slow on CPU. There's no cloud content or CapCut project import.</p></details>
+  </section>
+
+  <footer>FreeCut &middot; made by Chaz &middot; <a href="https://github.com/wapytor/freecut">Source on GitHub</a></footer>
+</div>
+</body>
+</html>
