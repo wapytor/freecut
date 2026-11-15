@@ -1,6 +1,6 @@
 {
   "name": "freecut",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "FreeCut - a free video editor. No paywalls, no watermark.",
   "main": "main.js",
   "author": "Chaz",
